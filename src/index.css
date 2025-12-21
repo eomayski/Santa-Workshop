@@ -2,10 +2,20 @@
 
 .wrapper {
     min-height: 100vh;
-    
+
     display: flex;
-    
+
     flex-direction: column;
 
     align-items: center;
+}
+
+@keyframes snowfall {
+    0% {
+        transform: translateY(-10vh) translateX(0);
+    }
+
+    100% {
+        transform: translateY(110vh) translateX(20px);
+    }
 }

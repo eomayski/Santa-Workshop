@@ -1,7 +1,9 @@
-import React from 'react';
 import { Home, ArrowLeft, Snowflake, Search } from 'lucide-react';
+import useTitle from '../title/useTitle.jsx';
+import { Link } from 'react-router';
 
 const NotFound = () => {
+    useTitle('Not Found')
     return (
         <>
             {/* --- 404 Glass Card --- */}
@@ -51,13 +53,14 @@ const NotFound = () => {
                         Go Back
                     </button>
 
+                    <Link to="/">
                     <button
-                        onClick={() => window.location.href = '/'} // Или използвай <Link to="/">
                         className="px-8 py-3.5 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-2xl font-bold shadow-lg shadow-red-900/30 flex items-center justify-center gap-2 transition-all hover:scale-105 active:scale-95"
                         >
                         <Home size={20} />
                         Return to Workshop
                     </button>
+                        </Link>
                 </div>
 
                 {/* Footer Note */}
