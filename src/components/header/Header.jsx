@@ -129,7 +129,7 @@ const Header = () => {
                         {navLinks.map((link) => (
                             <Link
                                 key={link.name}
-                                to={`#${link.name.toLowerCase()}`}
+                                to={`/${link.name.toLowerCase()}`}
                                 className="px-4 py-3 text-white hover:bg-white/10 rounded-2xl font-bold flex items-center gap-3 transition-colors"
                                 onClick={() => setIsMobileMenuOpen(false)}
                             >

@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router";
 import Header from './components/header/Header.jsx';
 import Home from './components/home/Home.jsx';
 import NotFound from "./components/404/NotFound.jsx";
+import ToysList from "./components/toys/ToysList.jsx";
 
 const App = () => {
 
@@ -16,6 +17,8 @@ const App = () => {
                 <Header />
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/toys" element={<ToysList />} />
+
                     <Route path="/*" element={<NotFound />} />
                 </Routes>
             </div>

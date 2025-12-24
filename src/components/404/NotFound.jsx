@@ -1,9 +1,10 @@
 import { Home, ArrowLeft, Snowflake, Search } from 'lucide-react';
-import useTitle from '../title/useTitle.jsx';
 import { Link } from 'react-router';
+import useTitle from '../../hooks/useTitle.js';
 
 const NotFound = () => {
     useTitle('Not Found')
+    
     return (
         <>
             {/* --- 404 Glass Card --- */}

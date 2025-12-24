@@ -1,4 +1,4 @@
-import useTitle from "../title/useTitle.jsx";
+import useTitle from "../../hooks/useTitle.js";
 import Hero from "./Hero.jsx";
 
 export default function Home () {
