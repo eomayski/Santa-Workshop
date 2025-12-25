@@ -5,6 +5,7 @@ import {
 } from 'lucide-react';
 import useTitle from '../../hooks/useTitle.js';
 import { useToys } from '../../hooks/useToys.js';
+import { Link } from 'react-router';
 
 // --- Примерни Данни ---
 
@@ -15,7 +16,7 @@ const ToysList = () => {
     const [filterCategory, setFilterCategory] = useState("All");
     const [filterInStock, setFilterInStock] = useState(false);
     const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
-    const { data: toys, isLoading, error, isPending } = useToys();
+    const { data: toys, error, isPending } = useToys();
     
 
     // --- Helpers за Сортиране ---
@@ -38,11 +39,9 @@ const ToysList = () => {
 
     // --- Filtering and Sorting ---
     const processedToys = useMemo(() => {
-        try {
             if (!toys || typeof toys !== 'object' || Object.keys(toys).length === 0) return [];
             
             let data = Object.entries(toys).map(([id, toy]) => ({ ...toy, id }));
-            console.log('Initial data:', data);
 
             // 1. Filtering
             if (filterCategory !== "All") {
@@ -69,12 +68,7 @@ const ToysList = () => {
                 });
             }
 
-            console.log('Final processedToys:', data);
             return data;
-        } catch (err) {
-            console.error('Error in processedToys:', err);
-            return [];
-        }
     }, [toys, filterCategory, filterInStock, sortConfig]);
 
     const CATEGORIES = useMemo(() => {
@@ -93,9 +87,6 @@ const ToysList = () => {
         if (sortConfig.key !== columnKey) return <div className="w-4 h-4 opacity-0" />;
         return sortConfig.direction === 'asc' ? <ChevronUp size={16} /> : <ChevronDown size={16} />;
     };
-
-    console.log(processedToys);
-    console.log(CATEGORIES);
     
     
     return (
@@ -143,9 +134,9 @@ const ToysList = () => {
                             onChange={(e) => setFilterCategory(e.target.value)}
                             className="w-full pl-10 pr-10 py-2.5 bg-black/20 hover:bg-black/30 border border-white/20 rounded-xl text-white appearance-none outline-none focus:border-white/50 transition-all cursor-pointer"
                         >
-                            <option value="All" className="bg-slate-800 text-white">All</option>
+                            <option value="All" className="bg-white/20 backdrop-blur-xl">All</option>
                             {Array.from(CATEGORIES).map(cat => (
-                                <option key={cat} value={cat} className="bg-slate-800 text-white">
+                                <option key={cat} value={cat} className="bg-white/20 backdrop-blur-xl">
                                     {cat}
                                 </option>
                             ))}
@@ -155,7 +146,7 @@ const ToysList = () => {
                         </div>
                     </div>
 
-                    {/* In Stock Checkbox (Custom Glass) */}
+                    {/* In Stock Checkbox */}
                     <label className="flex items-center gap-3 cursor-pointer group select-none">
                         <div className="relative">
                             <input
@@ -178,7 +169,7 @@ const ToysList = () => {
                 </div>
             </div>
 
-            {/* --- Table Container (Ice Panel) --- */}
+            {/* --- Table Container --- */}
             <div className="overflow-hidden rounded-[30px] bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl">
                 <div className="overflow-x-auto">
                     <table className="w-full text-left border-collapse">
@@ -233,7 +224,7 @@ const ToysList = () => {
                                         </td>
 
                                         <td className="p-5">
-                                            {/* Difficulty Badge Logic */}
+                                            {/* Difficulty Logic */}
                                             <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${toy.difficulty === 'Easy' ? 'bg-green-500/20 border-green-400/30 text-green-200' :
                                                     toy.difficulty === 'Medium' ? 'bg-amber-500/20 border-amber-400/30 text-amber-200' :
                                                         'bg-red-500/20 border-red-400/30 text-red-200'
@@ -258,10 +249,13 @@ const ToysList = () => {
                                         </td>
 
                                         <td className="p-5 text-right">
+                                            <Link to={`/toys/${toy.id}`}>
                                             <button className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white border border-white/30 rounded-xl transition-all shadow-sm hover:scale-105 active:scale-95 flex items-center gap-2 ml-auto">
                                                 <span className="text-xs font-bold hidden sm:inline">Details</span>
                                                 <Eye size={16} />
                                             </button>
+                                            </Link>
+
                                         </td>
                                     </tr>
                                 ))
