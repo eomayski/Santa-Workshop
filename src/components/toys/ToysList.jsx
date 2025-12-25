@@ -4,19 +4,19 @@ import {
     Check, X, Eye, PackageOpen
 } from 'lucide-react';
 import useTitle from '../../hooks/useTitle.js';
+import { useToys } from '../../hooks/useToys.js';
 
 // --- Примерни Данни ---
-
-const CATEGORIES = ["All", "Wooden", "Plush", "Electronic", "Puzzle", "Craft"];
 
 const ToysList = () => {
     useTitle('Toys')
     
     // State
-    const [toysData, setToysData] = useState([]);
     const [filterCategory, setFilterCategory] = useState("All");
     const [filterInStock, setFilterInStock] = useState(false);
     const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
+    const { data: toys, isLoading, error, isPending } = useToys();
+    
 
     // --- Helpers за Сортиране ---
     const getDifficultyWeight = (difficulty) => {
@@ -38,47 +38,91 @@ const ToysList = () => {
 
     // --- Filtering and Sorting ---
     const processedToys = useMemo(() => {
-        let data = [...toysData];
+        try {
+            if (!toys || typeof toys !== 'object' || Object.keys(toys).length === 0) return [];
+            
+            let data = Object.entries(toys).map(([id, toy]) => ({ ...toy, id }));
+            console.log('Initial data:', data);
 
-        // 1. Filtering
-        if (filterCategory !== "All") {
-            data = data.filter(toy => toy.category === filterCategory);
+            // 1. Filtering
+            if (filterCategory !== "All") {
+                data = data.filter(toy => toy.category === filterCategory);
+            }
+            if (filterInStock) {
+                data = data.filter(toy => toy.inStock);
+            }
+
+            // 2. Sorting
+            if (sortConfig.key) {
+                data.sort((a, b) => {
+                    let aValue = a[sortConfig.key];
+                    let bValue = b[sortConfig.key];
+
+                    if (sortConfig.key === 'difficulty') {
+                        aValue = getDifficultyWeight(aValue);
+                        bValue = getDifficultyWeight(bValue);
+                    }
+
+                    if (aValue < bValue) return sortConfig.direction === 'asc' ? -1 : 1;
+                    if (aValue > bValue) return sortConfig.direction === 'asc' ? 1 : -1;
+                    return 0;
+                });
+            }
+
+            console.log('Final processedToys:', data);
+            return data;
+        } catch (err) {
+            console.error('Error in processedToys:', err);
+            return [];
         }
-        if (filterInStock) {
-            data = data.filter(toy => toy.inStock);
-        }
+    }, [toys, filterCategory, filterInStock, sortConfig]);
 
-        // 2. Sorting
-        if (sortConfig.key) {
-            data.sort((a, b) => {
-                let aValue = a[sortConfig.key];
-                let bValue = b[sortConfig.key];
-
-                if (sortConfig.key === 'difficulty') {
-                    aValue = getDifficultyWeight(aValue);
-                    bValue = getDifficultyWeight(bValue);
-                }
-
-                if (aValue < bValue) return sortConfig.direction === 'asc' ? -1 : 1;
-                if (aValue > bValue) return sortConfig.direction === 'asc' ? 1 : -1;
-                return 0;
-            });
-        }
-
-        return data;
-    }, [filterCategory, filterInStock, sortConfig]);
-
+    const CATEGORIES = useMemo(() => {
+        if (!toys || Object.keys(toys).length === 0) return new Set();
+        
+        const categories = new Set();
+        Object.values(toys).forEach(toy => {
+            if (toy.category) {
+                categories.add(toy.category);
+            }
+        });
+        return categories;
+    }, [toys]);
     // --- Sort Arrow Component ---
     const SortIcon = ({ columnKey }) => {
         if (sortConfig.key !== columnKey) return <div className="w-4 h-4 opacity-0" />;
         return sortConfig.direction === 'asc' ? <ChevronUp size={16} /> : <ChevronDown size={16} />;
     };
 
+    console.log(processedToys);
+    console.log(CATEGORIES);
+    
+    
     return (
         <div className="w-full max-w-6xl mx-auto p-4 mb-20">
 
-            {/* --- Controls Bar (Filters) --- */}
-            <div className="mb-6 flex flex-col md:flex-row justify-between items-center gap-4 bg-white/10 backdrop-blur-xl border border-white/30 rounded-2xl p-4 shadow-lg">
+            {/* Loading State */}
+            {isPending && (
+                <div className="text-center py-12">
+                    <div className="inline-block text-white">
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mb-4"></div>
+                        <p>Loading toys...</p>
+                    </div>
+                </div>
+            )}
+
+            {/* Error State */}
+            {error && (
+                <div className="bg-red-500/20 border border-red-500 text-red-200 p-4 rounded-lg mb-6">
+                    <p className="font-bold">Error loading toys:</p>
+                    <p>{error.message}</p>
+                </div>
+            )}
+
+            {/* Main Content - Only show if not loading and no error */}
+            {!isPending && !error && (
+                <>
+                <div className="mb-6 flex flex-col md:flex-row justify-between items-center gap-4 bg-white/10 backdrop-blur-xl border border-white/30 rounded-2xl p-4 shadow-lg">
 
                 {/* Title */}
                 <div className="flex items-center gap-2 text-white">
@@ -89,7 +133,7 @@ const ToysList = () => {
                 {/* Filters Group */}
                 <div className="flex flex-col sm:flex-row items-center gap-4 w-full md:w-auto">
 
-                    {/* Category Dropdown (Glass Style) */}
+                    {/* Category Dropdown */}
                     <div className="relative w-full sm:w-48 group">
                         <div className="absolute left-3 top-1/2 -translate-y-1/2 text-white/60 pointer-events-none">
                             <Filter size={16} />
@@ -99,7 +143,8 @@ const ToysList = () => {
                             onChange={(e) => setFilterCategory(e.target.value)}
                             className="w-full pl-10 pr-10 py-2.5 bg-black/20 hover:bg-black/30 border border-white/20 rounded-xl text-white appearance-none outline-none focus:border-white/50 transition-all cursor-pointer"
                         >
-                            {CATEGORIES.map(cat => (
+                            <option value="All" className="bg-slate-800 text-white">All</option>
+                            {Array.from(CATEGORIES).map(cat => (
                                 <option key={cat} value={cat} className="bg-slate-800 text-white">
                                     {cat}
                                 </option>
@@ -179,7 +224,6 @@ const ToysList = () => {
                                     >
                                         <td className="p-5 font-medium">
                                             <div className="text-base">{toy.name}</div>
-                                            <div className="text-xs text-white/50">{toy.price}</div>
                                         </td>
 
                                         <td className="p-5">
@@ -239,6 +283,8 @@ const ToysList = () => {
                     <span>Showing {processedToys.length} toys</span>
                 </div>
             </div>
+                </>
+            )}
         </div>
     );
 };
