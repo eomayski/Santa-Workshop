@@ -4,6 +4,7 @@ import Home from './components/home/Home.jsx';
 import NotFound from "./components/404/NotFound.jsx";
 import ToysList from "./components/toys/ToysList.jsx";
 import ToyDetails from "./components/toys/ToyDetails.jsx";
+import OrdersList from "./components/orders/OrdersList.jsx";
 
 const App = () => {
 
@@ -20,6 +21,8 @@ const App = () => {
                     <Route path="/" element={<Home />} />
                     <Route path="/toys" element={<ToysList />} />
                     <Route path="/toys/:toyId" element={<ToyDetails />} />
+                    <Route path="/orders" element={<OrdersList />} />
+
 
                     <Route path="/*" element={<NotFound />} />
                 </Routes>
