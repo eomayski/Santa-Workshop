@@ -10,10 +10,10 @@ const App = () => {
 
     return (
         // Main Container with Background
-        <div className="relative min-h-screen bg-slate-900 overflow-hidden flex justify-center">
+        <div className="relative h-screen bg-slate-900 overflow-y-auto flex justify-center">
             {/* Background Image */}
             <div
-                className="absolute inset-0 bg-[url(/images/background.png)] bg-cover bg-center"
+                className="absolute fixed inset-0 bg-[url(/images/background.png)] bg-cover bg-center"
             ></div>
             <div className="wrapper">
                 <Header />

@@ -37,28 +37,10 @@ const OrdersList = () => {
         }
 
         return data;
-    }, [activeTab]);
+    }, [orders, activeTab]);
 
     return (
         <div className="w-full max-w-5xl mx-auto p-4 mb-20">
-
-            {/* Loading State */}
-            {isPending && (
-                <div className="text-center py-12">
-                    <div className="inline-block text-white">
-                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mb-4"></div>
-                        <p>Loading toys...</p>
-                    </div>
-                </div>
-            )}
-
-            {/* Error State */}
-            {error && (
-                <div className="bg-red-500/20 border border-red-500 text-red-200 p-4 rounded-lg mb-6">
-                    <p className="font-bold">Error loading toys:</p>
-                    <p>{error.message}</p>
-                </div>
-            )}
 
             {/* --- Controls Bar: Tabs & Create Button --- */}
             <div className="mb-6 flex flex-col sm:flex-row justify-between items-center gap-4 bg-white/10 backdrop-blur-xl border border-white/30 rounded-[20px] p-2 shadow-lg">
@@ -91,6 +73,26 @@ const OrdersList = () => {
 
             </div>
 
+            {/* Loading State */}
+            {isPending && (
+                <div className="text-center py-12">
+                    <div className="inline-block text-white">
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mb-4"></div>
+                        <p>Loading toys...</p>
+                    </div>
+                </div>
+            )}
+
+            {/* Error State */}
+            {error && (
+                <div className="bg-red-500/20 border border-red-500 text-red-200 p-4 rounded-lg mb-6">
+                    <p className="font-bold">Error loading toys:</p>
+                    <p>{error.message}</p>
+                </div>
+            )}
+
+            {!isPending && !error && (
+                <>
             {/* --- Orders Table --- */}
             <div className="overflow-hidden rounded-[30px] bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl">
                 <div className="overflow-x-auto">
@@ -127,7 +129,8 @@ const OrdersList = () => {
                     </div>
                 </div>
             </div>
-
+            </>
+            )}
         </div>
     );
 };

@@ -1,9 +1,11 @@
 import { Gift, Package, Users } from 'lucide-react';
 import NoticeBoard from './NoticeBoard.jsx';
 import { useToys } from '../../hooks/useToys.js';
+import { useOrders } from '../../hooks/useOrders.js';
 
 const Hero = () => {
     const { data: toys, error, isPending } = useToys();
+    const { data: orders } = useOrders();
 
 
     return (
@@ -40,7 +42,7 @@ const Hero = () => {
                         <div className="p-3 bg-blue-500/90 text-white rounded-2xl mb-3 shadow-inner">
                             <Gift size={28} strokeWidth={2.5} />
                         </div>
-                        <h3 className="text-blue-100 text-xs font-bold uppercase tracking-widest mb-1">Total Toys Made</h3>
+                        <h3 className="text-blue-100 text-xs font-bold uppercase tracking-widest mb-1">Total Toys</h3>
                         <p className="text-3xl sm:text-4xl font-black text-white drop-shadow-md">{isPending ? 'Toys Loading...' : error ? "Error on toys cont" : Object.keys(toys).length}</p>
                     </div>
 
