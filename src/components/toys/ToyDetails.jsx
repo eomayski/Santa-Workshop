@@ -71,7 +71,7 @@ const ToyDetails = () => {
                                     className={`w-full relative h-12 rounded-xl transition-all duration-300 border flex items-center px-1 shadow-inner ${toy.inStock
                                         ? 'bg-green-500/20 border-green-500/50'
                                         : 'bg-red-500/20 border-red-500/50'
-                                        }`}
+                                        } cursor-pointer`}
                                 >
                                     {/* Background Text Labels */}
                                     <div className="absolute inset-0 flex justify-between items-center px-4 text-xs font-bold uppercase pointer-events-none">
@@ -128,7 +128,7 @@ const ToyDetails = () => {
 
                                 <div>
                                     <Link to={'/toys'}>
-                                        <button className="px-6 py-3 h-full bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl border border-white/20 flex items-center gap-2 transition-all hover:scale-105 active:scale-95">
+                                        <button className="px-6 py-3 h-full bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl border border-white/20 flex items-center gap-2 transition-all hover:scale-105 active:scale-95 cursor-pointer">
                                             <ArrowLeft size={20} />
                                             Back to Inventory
                                         </button>

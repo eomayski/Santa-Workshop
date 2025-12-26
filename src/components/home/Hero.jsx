@@ -9,7 +9,9 @@ const Hero = () => {
 
 
     return (
-        <>
+            <div className="w-full max-w-6xl mx-auto p-4 mb-20">
+
+
             {/* Dark Overlay for contrast */}
             <div className="absolute inset-0 bg-slate-900/40"></div>
 
@@ -66,7 +68,7 @@ const Hero = () => {
                 </div>
 
             </div>
-        </>
+        </div>
     );
 }
 

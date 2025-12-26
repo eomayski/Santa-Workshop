@@ -79,7 +79,7 @@ const ToysList = () => {
         });
         return categories;
     }, [toys]);
-    
+
     // --- Sort Arrow Component ---
     const SortIcon = ({ columnKey }) => {
         if (sortConfig.key !== columnKey) return <div className="w-4 h-4 opacity-0" />;
@@ -116,7 +116,7 @@ const ToysList = () => {
                 {/* Title */}
                 <div className="flex items-center gap-2 text-white">
                     <PackageOpen className="text-blue-200" />
-                    <h2 className="text-xl font-bold tracking-wide">Toy Inventory</h2>
+                    <h2 className="text-xl font-bold tracking-wide">Toys Inventory</h2>
                 </div>
 
                 {/* Filters Group */}
@@ -248,7 +248,7 @@ const ToysList = () => {
 
                                         <td className="p-5 text-right">
                                             <Link to={`/toys/${toy.id}`}>
-                                            <button className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white border border-white/30 rounded-xl transition-all shadow-sm hover:scale-105 active:scale-95 flex items-center gap-2 ml-auto">
+                                            <button className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white border border-white/30 rounded-xl transition-all shadow-sm hover:scale-105 active:scale-95 flex items-center gap-2 ml-auto cursor-pointer">
                                                 <span className="text-xs font-bold hidden sm:inline">Details</span>
                                                 <Eye size={16} />
                                             </button>
