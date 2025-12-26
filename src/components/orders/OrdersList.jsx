@@ -2,9 +2,13 @@ import { useState, useMemo } from 'react';
 import { Plus, Package } from 'lucide-react';
 import { useOrders } from '../../hooks/useOrders.js';
 import Order from './Order.jsx';
+import useTitle from '../../hooks/useTitle.js';
+import { Link } from 'react-router';
 
 
 const OrdersList = () => {
+    useTitle('Orders')
+
     const [activeTab, setActiveTab] = useState("All");
 
     const { data: orders, error, isPending } = useOrders();
@@ -65,11 +69,13 @@ const OrdersList = () => {
                 </div>
 
                 {/* Right Side: Create Button */}
+                <Link to={'/orders/new'}>
                 <button className="w-full sm:w-auto group relative px-6 py-2.5 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-xl font-bold shadow-lg shadow-red-900/30 transition-all active:scale-95 flex items-center justify-center gap-2 overflow-hidden cursor-pointer">
                     <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
                     <Plus size={18} className="relative z-10" />
                     <span className="relative z-10">Create Order</span>
                 </button>
+                </Link>
 
             </div>
 

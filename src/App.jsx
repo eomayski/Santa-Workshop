@@ -5,6 +5,7 @@ import NotFound from "./components/404/NotFound.jsx";
 import ToysList from "./components/toys/ToysList.jsx";
 import ToyDetails from "./components/toys/ToyDetails.jsx";
 import OrdersList from "./components/orders/OrdersList.jsx";
+import OrderCreate from "./components/orders/OrderCreate.jsx";
 
 const App = () => {
 
@@ -22,6 +23,7 @@ const App = () => {
                     <Route path="/toys" element={<ToysList />} />
                     <Route path="/toys/:toyId" element={<ToyDetails />} />
                     <Route path="/orders" element={<OrdersList />} />
+                    <Route path="/orders/new" element={<OrderCreate />} />
 
 
                     <Route path="/*" element={<NotFound />} />
