@@ -1,8 +1,5 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import {
-    Search, Filter, ChevronDown, ChevronUp,
-    Check, X, Eye, PackageOpen
-} from 'lucide-react';
+import { useState, useMemo } from 'react';
+import { Filter, ChevronDown, ChevronUp, Check, X, Eye, PackageOpen } from 'lucide-react';
 import useTitle from '../../hooks/useTitle.js';
 import { useToys } from '../../hooks/useToys.js';
 import { Link } from 'react-router';
@@ -82,6 +79,7 @@ const ToysList = () => {
         });
         return categories;
     }, [toys]);
+    
     // --- Sort Arrow Component ---
     const SortIcon = ({ columnKey }) => {
         if (sortConfig.key !== columnKey) return <div className="w-4 h-4 opacity-0" />;

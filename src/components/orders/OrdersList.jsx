@@ -32,9 +32,6 @@ const OrdersList = () => {
         return order
     })
 
-    console.log(data);
-    
-
         if (activeTab !== "All") {
             data = data.filter(order => order.status === activeTab);
         }
@@ -45,7 +42,7 @@ const OrdersList = () => {
     return (
         <div className="w-full max-w-5xl mx-auto p-4 mb-20">
 
-                        {/* Loading State */}
+            {/* Loading State */}
             {isPending && (
                 <div className="text-center py-12">
                     <div className="inline-block text-white">

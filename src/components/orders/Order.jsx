@@ -7,7 +7,7 @@ country,
 status,
 toyId
 }) {
-    const { data: toy} = useToy(toyId);
+    const { data: toy, error, isPending} = useToy(toyId);
 
     // --- Helper: Status Styles ---
     const getStatusBadge = (status) => {
@@ -49,7 +49,7 @@ toyId
                     {/* Toy Name Subtext */}
                     <div className="flex items-center gap-1.5 text-sm text-blue-100/60 font-medium">
                         <Gift size={14} className="text-blue-300" />
-                        {toy.name}
+                        {isPending ? 'Toy Loading...' : error ? 'Error on finding toy name' : toy.name}
                     </div>
                 </div>
             </td>
