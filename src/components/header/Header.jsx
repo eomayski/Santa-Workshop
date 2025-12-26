@@ -27,14 +27,15 @@ const Header = () => {
                 {/* Лого */}
                 <div className="flex items-center gap-2 flex-shrink-0 cursor-pointer group">
                     <Link to={'/'}>
-                        <h2 className="text-white font-black text-xl tracking-tight drop-shadow-lg leading-none">
+                        <img src="/images/SW Logo.png" alt="Santa`s Workshop" className='max-h-15'/>
+                        {/* <h2 className="text-white font-black text-xl tracking-tight drop-shadow-lg leading-none">
                             Santa's <span className="text-red-500 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">Workshop</span>
-                        </h2>
+                        </h2> */}
                     </Link>
                 </div>
 
                 {/* Desktop Навигация */}
-                <nav className="hidden md:flex items-center gap-1">
+                <nav className="hidden mx-5 md:flex items-center gap-1">
                     {navLinks.map((link) => (
                         <Link
                             key={link.name}
@@ -54,7 +55,7 @@ const Header = () => {
                     <button
                         onClick={toggleSnow}
                         className={`
-                            relative flex items-center justify-center p-2 rounded-xl transition-all duration-500 ease-out border overflow-hidden
+                            relative flex items-center justify-center p-2 rounded-xl transition-all duration-500 ease-out border overflow-hidden cursor-pointer
                             ${isSnowing 
                                 ? 'bg-blue-500/20 text-blue-200 border-blue-400/30 shadow-[0_0_15px_rgba(59,130,246,0.4)]' 
                                 : 'bg-amber-500/20 text-amber-300 border-amber-400/30 shadow-[0_0_15px_rgba(245,158,11,0.4)]'

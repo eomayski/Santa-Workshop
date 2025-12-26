@@ -12,10 +12,7 @@ const Hero = () => {
             <div className="w-full max-w-6xl mx-auto p-4 mb-20">
 
 
-            {/* Dark Overlay for contrast */}
-            <div className="absolute inset-0 bg-slate-900/40"></div>
-
-            {/* Main Glass Panel */}
+           {/* Main Glass Panel */}
             <div className="relative mx-auto z-10 w-full max-w-5xl bg-white/10 backdrop-blur-xl border border-white/30 rounded-[40px] shadow-2xl overflow-hidden p-8 sm:p-10 text-center">
 
                 {/* Badge */}
