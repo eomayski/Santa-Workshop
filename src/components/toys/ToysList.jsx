@@ -88,7 +88,7 @@ const ToysList = () => {
     
     
     return (
-        <div className="w-full max-w-6xl mx-auto p-4 mb-20">
+        <>
 
             {/* Loading State */}
             {isPending && (
@@ -277,7 +277,7 @@ const ToysList = () => {
             </div>
                 </>
             )}
-        </div>
+        </>
     );
 };
 

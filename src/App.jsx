@@ -18,6 +18,7 @@ const App = () => {
             ></div>
             <div className="wrapper">
                 <Header />
+                <div className="w-full max-w-6xl mx-auto p-4 mb-20">
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/toys" element={<ToysList />} />
@@ -28,6 +29,7 @@ const App = () => {
 
                     <Route path="/*" element={<NotFound />} />
                 </Routes>
+                </div>
             </div>
         </div>
     );

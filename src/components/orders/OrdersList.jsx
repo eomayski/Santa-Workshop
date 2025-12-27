@@ -44,7 +44,7 @@ const OrdersList = () => {
     }, [orders, activeTab]);
 
     return (
-        <div className="w-full max-w-5xl mx-auto p-4 mb-20">
+        <>
 
             {/* --- Controls Bar: Tabs & Create Button --- */}
             <div className="mb-6 flex flex-col sm:flex-row justify-between items-center gap-4 bg-white/10 backdrop-blur-xl border border-white/30 rounded-[20px] p-2 shadow-lg">
@@ -137,7 +137,7 @@ const OrdersList = () => {
             </div>
             </>
             )}
-        </div>
+        </>
     );
 };
 

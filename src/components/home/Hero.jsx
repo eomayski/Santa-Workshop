@@ -4,15 +4,14 @@ import { useToys } from '../../hooks/useToys.js';
 import { useOrders } from '../../hooks/useOrders.js';
 
 const Hero = () => {
-    const { data: toys, error, isPending } = useToys();
+    const { data: toys, error: toysError, isPending: toysPending } = useToys();
     const { data: orders } = useOrders();
 
 
     return (
-            <div className="w-full max-w-6xl mx-auto p-4 mb-20">
 
-
-           {/* Main Glass Panel */}
+        <>
+            {/* Main Glass Panel */}
             <div className="relative mx-auto z-10 w-full max-w-5xl bg-white/10 backdrop-blur-xl border border-white/30 rounded-[40px] shadow-2xl overflow-hidden p-8 sm:p-10 text-center">
 
                 {/* Badge */}
@@ -42,7 +41,7 @@ const Hero = () => {
                             <Gift size={28} strokeWidth={2.5} />
                         </div>
                         <h3 className="text-blue-100 text-xs font-bold uppercase tracking-widest mb-1">Total Toys</h3>
-                        <p className="text-3xl sm:text-4xl font-black text-white drop-shadow-md">{isPending ? 'Toys Loading...' : error ? "Error on toys cont" : Object.keys(toys).length}</p>
+                        <p className="text-3xl sm:text-4xl font-black text-white drop-shadow-md">{toysPending ? 'Toys Loading...' : toysError ? "toysError on toys cont" : Object.keys(toys).length}</p>
                     </div>
 
                     {/* Card: Pending Orders */}
@@ -65,7 +64,8 @@ const Hero = () => {
                 </div>
 
             </div>
-        </div>
+        </>
+
     );
 }
 
