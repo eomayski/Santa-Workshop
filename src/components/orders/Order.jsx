@@ -57,7 +57,7 @@ toyId
             {/* Column 2: Country */}
             <td className="p-5">
                 <div className="flex items-center gap-2 text-sm font-medium opacity-90">
-                    <span className="text-white/80">{country}</span>
+                    <span className="text-white/80">{country.flag} {country.name.common}</span>
                 </div>
             </td>
 

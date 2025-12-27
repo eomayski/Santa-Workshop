@@ -6,6 +6,7 @@ import ToysList from "./components/toys/ToysList.jsx";
 import ToyDetails from "./components/toys/ToyDetails.jsx";
 import OrdersList from "./components/orders/OrdersList.jsx";
 import OrderCreate from "./components/orders/OrderCreate.jsx";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
 
@@ -18,6 +19,7 @@ const App = () => {
             ></div>
             <div className="wrapper">
                 <Header />
+                <ToastContainer theme="color" toastClassName={`bg-white/10 backdrop-blur-xl border border-white/30 rounded-2xl`} closeButton={false} />
                 <div className="w-full max-w-6xl mx-auto p-4 mb-20">
                 <Routes>
                     <Route path="/" element={<Home />} />
