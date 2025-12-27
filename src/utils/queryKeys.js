@@ -15,4 +15,8 @@ export const queryKeys = {
     list: () => [...queryKeys.elves.all, 'list'],
     detail: (id) => [...queryKeys.elves.all, 'detail', id],
   },
+  countries: {
+    all: ['countries'],
+    list: () => [...queryKeys.countries.all, 'list'],
+  },
 };

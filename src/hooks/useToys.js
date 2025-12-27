@@ -1,4 +1,3 @@
-// src/hooks/useToys.js
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { firebaseApi } from '../utils/api.js';
 import { queryKeys } from '../utils/queryKeys.js';

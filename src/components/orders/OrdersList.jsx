@@ -84,7 +84,7 @@ const OrdersList = () => {
                 <div className="text-center py-12">
                     <div className="inline-block text-white">
                         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mb-4"></div>
-                        <p>Loading toys...</p>
+                        <p>Loading orders...</p>
                     </div>
                 </div>
             )}
@@ -92,7 +92,7 @@ const OrdersList = () => {
             {/* Error State */}
             {error && (
                 <div className="bg-red-500/20 border border-red-500 text-red-200 p-4 rounded-lg mb-6">
-                    <p className="font-bold">Error loading toys:</p>
+                    <p className="font-bold">Error loading orders:</p>
                     <p>{error.message}</p>
                 </div>
             )}

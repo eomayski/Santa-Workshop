@@ -1,6 +1,16 @@
 import { Gift, Globe, SendHorizonal, Signal, User } from "lucide-react";
+import { useCountries } from "../../hooks/useCountries.js";
+import { useToys } from "../../hooks/useToys.js";
 
 export default function OrderCreate() {
+
+    const { data: countries, error: countriesError, isPending: countriesPending } = useCountries();
+    const { data: toys, error: toysError, isPending: toysPending } = useToys();
+
+
+    
+    
+
     return (
   <div className="w-full max-w-2xl mx-auto">
     
@@ -45,9 +55,13 @@ export default function OrderCreate() {
                       >
                           <option value="" className="bg-slate-800 text-white/50">Select Country...</option>
                           {/* Map your countries here */}
-                          <option value="Bulgaria" className="bg-slate-800">Bulgaria</option>
-                          <option value="UK" className="bg-slate-800">UK</option>
-                          <option value="USA" className="bg-slate-800">USA</option>
+                          {countriesPending ? 'Countries Loading...' : countriesError ? 'Error on countries' : 
+                                countries?.sort((a,b) => a.name.common.localeCompare(b.name.common)).map(country => (
+                                <option key={country.cca2} value={JSON.stringify(country)} className="bg-white/20 backdrop-blur-xl">
+                                   {country.flag} {country.name.common}
+                                </option>
+                            ))
+                            }
                       </select>
                       <div className="absolute right-4 top-1/2 -translate-y-1/2 text-white/50 pointer-events-none">
                           <Globe size={16} />
