@@ -21,6 +21,9 @@ export default function OrderCreate() {
     // --- State: Priority ---
     const [priority, setPriority] = useState(null);
 
+    // --- State: Child's Name ---
+    const [name, setName] = useState('')
+
     // --- State: TOYS (Searchable) ---
     const [toyInput, setToyInput] = useState('');
     const [toyId, setToyId] = useState('')
@@ -101,14 +104,14 @@ export default function OrderCreate() {
 
         country = JSON.parse(country)
         
-        console.log({childName, country, toyId, priority});
-
         const data = {childName, country, toyId, priority}
         
         createOrder(data)
 
         navigate('/orders')
     }
+
+
 
     // --- Click Outside Effect ---
     useEffect(() => {
@@ -147,8 +150,10 @@ export default function OrderCreate() {
                             <input
                                 type="text"
                                 name="childName"
+                                value={name}
                                 placeholder="e.g. Timmy Turner"
                                 className="w-full bg-black/10 hover:bg-black/20 focus:bg-black/20 border border-white/10 focus:border-white/40 rounded-xl p-4 text-white placeholder-white/30 outline-none transition-all"
+                                onChange={(e) => setName(e.target.value)}
                             />
                         </div>
                     </div>

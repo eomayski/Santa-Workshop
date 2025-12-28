@@ -3,7 +3,7 @@ import { useOrders } from "../../hooks/useOrders.js";
 import { useToys } from "../../hooks/useToys.js";
 import { Gift, Package, Users } from "lucide-react";
 
-export default function StatusCard({ theme }) {
+export default function StatusCard({ card }) {
     const { data: toys, error: toysError, isPending: toysPending } = useToys();
     const { data: orders, error: ordersError, isPending: ordersPending } = useOrders();
 
@@ -12,7 +12,7 @@ export default function StatusCard({ theme }) {
     const [isPending, setIsPending] = useState(null);
 
     useEffect(() => {
-        switch (theme) {
+        switch (card) {
             case "toys":
                 if (toys) {
                     setData([...Object.keys(toys)])
@@ -28,13 +28,13 @@ export default function StatusCard({ theme }) {
                 }
                 break;
         }
-    }, [theme, toys, toysError, toysPending, orders, ordersError, ordersPending])
+    }, [card, toys, toysError, toysPending, orders, ordersError, ordersPending])
 
     return (
 
         <div className="group rounded-3xl bg-white/20 backdrop-blur-lg border border-white/30 p-6 flex flex-col items-center shadow-lg hover:bg-white/25 transition-all duration-300">
 
-            {theme === "toys" ?
+            {card === "toys" ?
                 <>
                     <div className="p-3 bg-blue-500/90 text-white rounded-2xl mb-3 shadow-inner">
                         <Gift size={28} strokeWidth={2.5} />
@@ -42,7 +42,7 @@ export default function StatusCard({ theme }) {
                     <h3 className="text-blue-100 text-xs font-bold uppercase tracking-widest mb-1">Total Toys</h3>
                 </>
                 :
-                theme === "orders" ?
+                card === "orders" ?
                 <>
                     <div className="p-3 bg-orange-500/90 text-white rounded-2xl mb-3 shadow-inner">
                         <Package size={28} strokeWidth={2.5} />
@@ -57,7 +57,7 @@ export default function StatusCard({ theme }) {
                     <h3 className="text-green-100 text-xs font-bold uppercase tracking-widest mb-1">Active Elves</h3>
                 </>}
 
-            <p className="text-3xl sm:text-4xl font-black text-white drop-shadow-md">{isPending ? 'Toys Loading...' : error ? "Error on toys cont" : data.length}</p>
+            <p className="text-3xl sm:text-4xl font-black text-white drop-shadow-md">{isPending ? 'Loading...' : error ? "Error!" : data.length}</p>
         </div>
     );
 }

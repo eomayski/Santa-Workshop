@@ -32,10 +32,10 @@ const Hero = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
                     
                     {/* Card: Total Toys */}
-                    <StatusCard theme={"toys"}/>
+                    <StatusCard card={"toys"}/>
 
                     {/* Card: Pending Orders */}
-                    <StatusCard theme={"orders"}/>
+                    <StatusCard card={"orders"}/>
 
                     {/* Card: Active Elves */}
                     <div className="group rounded-3xl bg-white/20 backdrop-blur-lg border border-white/30 p-6 flex flex-col items-center shadow-lg hover:bg-white/25 transition-all duration-300">
