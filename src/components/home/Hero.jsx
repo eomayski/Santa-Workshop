@@ -1,13 +1,8 @@
-import { Gift, Package, Users } from 'lucide-react';
+import { Users } from 'lucide-react';
 import NoticeBoard from './NoticeBoard.jsx';
-import { useToys } from '../../hooks/useToys.js';
-import { useOrders } from '../../hooks/useOrders.js';
+import StatusCard from './StatusCard.jsx';
 
 const Hero = () => {
-    const { data: toys, error: toysError, isPending: toysPending } = useToys();
-    const { data: orders } = useOrders();
-
-
     return (
 
         <>
@@ -35,23 +30,12 @@ const Hero = () => {
                 <NoticeBoard />
                 {/* Stats Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                    
                     {/* Card: Total Toys */}
-                    <div className="group rounded-3xl bg-white/20 backdrop-blur-lg border border-white/30 p-6 flex flex-col items-center shadow-lg hover:bg-white/25 transition-all duration-300">
-                        <div className="p-3 bg-blue-500/90 text-white rounded-2xl mb-3 shadow-inner">
-                            <Gift size={28} strokeWidth={2.5} />
-                        </div>
-                        <h3 className="text-blue-100 text-xs font-bold uppercase tracking-widest mb-1">Total Toys</h3>
-                        <p className="text-3xl sm:text-4xl font-black text-white drop-shadow-md">{toysPending ? 'Toys Loading...' : toysError ? "toysError on toys cont" : Object.keys(toys).length}</p>
-                    </div>
+                    <StatusCard theme={"toys"}/>
 
                     {/* Card: Pending Orders */}
-                    <div className="group rounded-3xl bg-white/20 backdrop-blur-lg border border-white/30 p-6 flex flex-col items-center shadow-lg hover:bg-white/25 transition-all duration-300">
-                        <div className="p-3 bg-orange-500/90 text-white rounded-2xl mb-3 shadow-inner">
-                            <Package size={28} strokeWidth={2.5} />
-                        </div>
-                        <h3 className="text-orange-100 text-xs font-bold uppercase tracking-widest mb-1">Pending Orders</h3>
-                        <p className="text-3xl sm:text-4xl font-black text-white drop-shadow-md">42,105</p>
-                    </div>
+                    <StatusCard theme={"orders"}/>
 
                     {/* Card: Active Elves */}
                     <div className="group rounded-3xl bg-white/20 backdrop-blur-lg border border-white/30 p-6 flex flex-col items-center shadow-lg hover:bg-white/25 transition-all duration-300">
@@ -59,7 +43,7 @@ const Hero = () => {
                             <Users size={28} strokeWidth={2.5} />
                         </div>
                         <h3 className="text-green-100 text-xs font-bold uppercase tracking-widest mb-1">Active Elves</h3>
-                        <p className="text-3xl sm:text-4xl font-black text-white drop-shadow-md">12,400</p>
+                        <p className="text-3xl sm:text-4xl font-black text-white drop-shadow-md">12</p>
                     </div>
                 </div>
 

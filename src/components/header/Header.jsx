@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Menu, X, LogIn, LogOut, UserPlus, Gift, Package, Users, Snowflake, Sun } from 'lucide-react';
-import { Link } from 'react-router';
+import { Link, NavLink } from 'react-router';
 import SnowOverlay from '../snow/SnowOverlay.jsx';
 
 const Header = () => {
@@ -37,14 +37,14 @@ const Header = () => {
                 {/* Desktop Навигация */}
                 <nav className="hidden mx-5 md:flex items-center gap-1">
                     {navLinks.map((link) => (
-                        <Link
+                        <NavLink style={({ isActive }) => isActive ? { color: '#8ec5ff' } : {}}
                             key={link.name}
                             to={`/${link.name.toLowerCase()}`}
                             className="px-4 py-2 text-blue-100 hover:text-white text-sm font-bold uppercase tracking-wider flex items-center gap-2 rounded-xl hover:bg-white/10 transition-all duration-300 drop-shadow-sm"
                         >
                             <span className="opacity-70">{link.icon}</span>
                             {link.name}
-                        </Link>
+                        </NavLink>
                     ))}
                 </nav>
 
@@ -128,7 +128,7 @@ const Header = () => {
                     <div className="mx-auto max-w-6xl rounded-[30px] bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl overflow-hidden p-4 flex flex-col gap-2">
 
                         {navLinks.map((link) => (
-                            <Link
+                            <NavLink style={({ isActive }) => isActive ? { color: '#8ec5ff' } : {}}
                                 key={link.name}
                                 to={`/${link.name.toLowerCase()}`}
                                 className="px-4 py-3 text-white hover:bg-white/10 rounded-2xl font-bold flex items-center gap-3 transition-colors"
@@ -136,7 +136,7 @@ const Header = () => {
                             >
                                 <span className="text-white/70">{link.icon}</span>
                                 {link.name}
-                            </Link>
+                            </NavLink>
                         ))}
 
                         <div className="h-px bg-white/20 my-2 mx-4"></div>
