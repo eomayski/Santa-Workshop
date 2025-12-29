@@ -2,7 +2,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { firebaseApi } from '../utils/api.js';
 import { queryKeys } from '../utils/queryKeys.js';
 
-// 1. Взимане на всички играчки
+// Get all toys
 export const useToys = () => {
   return useQuery({
     queryKey: queryKeys.toys.list(),
@@ -10,7 +10,7 @@ export const useToys = () => {
   });
 };
 
-// 2. Взимане на една играчка по ID
+// Get one toy by ID
 export const useToy = (id) => {
   return useQuery({
     queryKey: queryKeys.toys.detail(id),
@@ -19,7 +19,7 @@ export const useToy = (id) => {
   });
 };
 
-// 3. Промяна на наличност (Toggle Stock)
+// Toggle Stock with PATCH
 export const useToggleToyStock = () => {
   const queryClient = useQueryClient();
 

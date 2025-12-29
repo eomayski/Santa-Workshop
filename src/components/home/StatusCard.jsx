@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useOrders } from "../../hooks/useOrders.js";
 import { useToys } from "../../hooks/useToys.js";
+import { useElves } from "../../hooks/useElves.js";
 import { Gift, Package, Users } from "lucide-react";
 
 export default function StatusCard({ card }) {
     const { data: toys, error: toysError, isPending: toysPending } = useToys();
     const { data: orders, error: ordersError, isPending: ordersPending } = useOrders();
+    const { data: elves, error: elvesError, isPending: elvesPending } = useElves();
 
     const [data, setData] = useState([]);
     const [error, setError] = useState(null);
@@ -27,8 +29,15 @@ export default function StatusCard({ card }) {
                     setIsPending(ordersPending)
                 }
                 break;
+            case "elves":
+                if (elves) {
+                    setData([...Object.keys(elves)])
+                    setError(elvesError)
+                    setIsPending(elvesPending)
+                }
+                break;
         }
-    }, [card, toys, toysError, toysPending, orders, ordersError, ordersPending])
+    }, [card, toys, toysError, toysPending, orders, ordersError, ordersPending, elves, elvesError, elvesPending])
 
     return (
 

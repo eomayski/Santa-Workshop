@@ -38,13 +38,7 @@ const Hero = () => {
                     <StatusCard card={"orders"}/>
 
                     {/* Card: Active Elves */}
-                    <div className="group rounded-3xl bg-white/20 backdrop-blur-lg border border-white/30 p-6 flex flex-col items-center shadow-lg hover:bg-white/25 transition-all duration-300">
-                        <div className="p-3 bg-green-500/90 text-white rounded-2xl mb-3 shadow-inner">
-                            <Users size={28} strokeWidth={2.5} />
-                        </div>
-                        <h3 className="text-green-100 text-xs font-bold uppercase tracking-widest mb-1">Active Elves</h3>
-                        <p className="text-3xl sm:text-4xl font-black text-white drop-shadow-md">12</p>
-                    </div>
+                    <StatusCard card={"elves"}/>
                 </div>
 
             </div>
