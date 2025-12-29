@@ -9,7 +9,7 @@ toyId
 }) {
     const { data: toy, error, isPending} = useToy(toyId);
 
-    // --- Helper: Status Styles ---
+    // --- Status Styles ---
     const getStatusBadge = (status) => {
         switch (status) {
             case 'Pending':
@@ -30,8 +30,6 @@ toyId
                         <Truck size={12} /> Shipped
                     </span>
                 );
-            default:
-                return null;
         }
     };
 

@@ -7,6 +7,7 @@ import ToyDetails from "./components/toys/ToyDetails.jsx";
 import OrdersList from "./components/orders/OrdersList.jsx";
 import OrderCreate from "./components/orders/OrderCreate.jsx";
 import { ToastContainer } from "react-toastify";
+import ElvesList from "./components/elves/ElvesList.jsx";
 
 const App = () => {
 
@@ -27,6 +28,7 @@ const App = () => {
                     <Route path="/toys/:toyId" element={<ToyDetails />} />
                     <Route path="/orders" element={<OrdersList />} />
                     <Route path="/orders/new" element={<OrderCreate />} />
+                    <Route path="/elves" element={<ElvesList />} />
 
 
                     <Route path="/*" element={<NotFound />} />
