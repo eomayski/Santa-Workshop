@@ -1,22 +1,25 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Filter, ChevronDown, ChevronUp, Check, X, Eye, PackageOpen } from 'lucide-react';
 import useTitle from '../../hooks/useTitle.js';
 import { useToys } from '../../hooks/useToys.js';
 import { Link } from 'react-router';
+import Pagination from '../pagination/Pagination.jsx';
 
-// --- Примерни Данни ---
 
 const ToysList = () => {
     useTitle('Toys')
     
-    // State
+    // --- State ---
     const [filterCategory, setFilterCategory] = useState("All");
     const [filterInStock, setFilterInStock] = useState(false);
     const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
     const { data: toys, error, isPending } = useToys();
     
+    // --- Pagination State ---
+    const [page, setPage] = useState(1);
+    const limit = 5;
 
-    // --- Helpers за Сортиране ---
+    // --- Helpers for Sorting ---
     const getDifficultyWeight = (difficulty) => {
         switch (difficulty) {
             case 'Easy': return 1;
@@ -85,8 +88,32 @@ const ToysList = () => {
         if (sortConfig.key !== columnKey) return <div className="w-4 h-4 opacity-0" />;
         return sortConfig.direction === 'asc' ? <ChevronUp size={16} /> : <ChevronDown size={16} />;
     };
+
+        // --- Pagination Logic ---
+    const handlePageForward = () => {
+        if (page * limit < processedToys.length) {
+            setPage(prev => prev + 1);
+        }
+    }
+
+        const handlePageBackward = () => {
+        setPage(prev => (prev > 1 ? prev - 1 : 1));
+    }
+
+    const itemsToShow = useMemo(() => {
+        const firstItemIndex = (page - 1) * limit;
+        const lastItemIndex = firstItemIndex + limit;
+        
+        if (processedToys.length) {
+            return processedToys.slice(firstItemIndex, lastItemIndex);
+        }
+        return [];
+    }, [page, limit, processedToys]);
     
-    
+        useEffect(() => {
+            setPage(1);
+        }, [filterCategory, filterInStock]);
+
     return (
         <>
 
@@ -205,8 +232,8 @@ const ToysList = () => {
 
                         {/* Table Body */}
                         <tbody className="text-white">
-                            {processedToys.length > 0 ? (
-                                processedToys.map((toy) => (
+                            {itemsToShow.length > 0 ? (
+                                itemsToShow.map((toy) => (
                                     <tr
                                         key={toy.id}
                                         className="border-b border-white/10 hover:bg-white/10 transition-colors group"
@@ -270,10 +297,16 @@ const ToysList = () => {
                     </table>
                 </div>
 
-                {/* Simple Footer / Pagination placeholder */}
-                <div className="p-4 bg-white/5 border-t border-white/10 flex justify-between items-center text-sm text-white/50">
-                    <span>Showing {processedToys.length} toys</span>
-                </div>
+                        {/* Pagination Component */}
+                        <Pagination 
+                            total={processedToys.length} 
+                            pageForward={handlePageForward} 
+                            pageBackward={handlePageBackward} 
+                            itemsToShow={itemsToShow.length} 
+                            page={page} 
+                            limit={limit} 
+                            itemsName={'toys'} 
+                        />
             </div>
                 </>
             )}

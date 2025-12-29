@@ -17,7 +17,6 @@ const OrdersList = () => {
     
     const TABS = ["All", "Pending", "Packed", "Shipped"];
 
-    // 1. Нулиране на страницата при смяна на таба
     useEffect(() => {
         setPage(1);
     }, [activeTab]);
@@ -46,21 +45,20 @@ const OrdersList = () => {
         return data;
     }, [orders, activeTab]);
 
-    // 2. ПОПРАВКА: Използвай prev + 1, а не state++
+
+    // --- Pagination Logic ---
     const handlePageForward = () => {
         if (page * limit < filteredOrders.length) {
             setPage(prev => prev + 1);
         }
     }
 
-    // 2. ПОПРАВКА: Използвай prev - 1
-    const handlePageBackward = () => {
+        const handlePageBackward = () => {
         setPage(prev => (prev > 1 ? prev - 1 : 1));
     }
 
-    // 3. ПОПРАВКА: Добавен dependency array [page, limit, filteredOrders]
     const itemsToShow = useMemo(() => {
-        const firstItemIndex = (page - 1) * limit; // page starts at 1, so index starts at 0
+        const firstItemIndex = (page - 1) * limit;
         const lastItemIndex = firstItemIndex + limit;
         
         if (filteredOrders.length) {
@@ -71,7 +69,6 @@ const OrdersList = () => {
 
     return (
         <>
-            {/* ... Controls Bar code (без промяна) ... */}
             <div className="mb-6 flex flex-col sm:flex-row justify-between items-center gap-4 bg-white/10 backdrop-blur-xl border border-white/30 rounded-[20px] p-2 shadow-lg">
                 <div className="flex p-1 bg-black/20 rounded-xl w-full sm:w-auto overflow-x-auto">
                     {TABS.map((tab) => (
