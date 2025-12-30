@@ -1,11 +1,13 @@
-import { ArrowLeft, Zap, ListTodo, Coffee, Sparkles } from 'lucide-react';
+import { Zap, ListTodo, Coffee, Sparkles, ListCollapse } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { Link, Outlet, useParams } from 'react-router';
+import { Link, Outlet, useLocation, useParams } from 'react-router';
 import { useElf } from '../../hooks/useElves.js';
 
 const ElfDetails = () => {
     const { elfId } = useParams()
+    const location = useLocation();
     const { data: elf, error, isPending } = useElf(elfId);
+    const [ taskIs, setTasksIs] = useState(location.pathname.endsWith('/tasks'))
 
 
     // --- Local State ---
@@ -31,6 +33,10 @@ const ElfDetails = () => {
         return 'from-red-400 to-red-600 shadow-[0_0_20px_rgba(248,113,113,0.5)]';
     };
 
+    const tasksOpenHandler = () => {
+        setTasksIs(!taskIs)
+    }
+
     return (
         <div className="w-full max-w-4xl mx-auto p-4 mb-20">
             {/* Loading State */}
@@ -54,6 +60,7 @@ const ElfDetails = () => {
 
             {/* --- Navigation Bar --- */}
             {!isPending && !error && (
+                <>
                     <div className="rounded-[40px] bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl overflow-hidden flex flex-col md:flex-row">
                         {/* --- Main Glass Card --- */}
 
@@ -132,17 +139,30 @@ const ElfDetails = () => {
 
                             {/* Action Button: Tasks */}
                             <div className="mt-auto pt-8 border-t border-white/10 ">
+                            {!taskIs ? 
                             <Link to={`./tasks`}>
-                                <button className="w-full px-6 py-4 bg-white/10 hover:bg-white/20 text-white font-bold rounded-2xl border border-white/30 flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-95 shadow-lg group cursor-pointer">
+                                <button
+                                    onClick={tasksOpenHandler}
+                                    className="w-full px-6 py-4 bg-white/10 hover:bg-white/20 text-white font-bold rounded-2xl border border-white/30 flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-95 shadow-lg group cursor-pointer">
                                     <ListTodo size={22} className="group-hover:text-blue-200 transition-colors" />
                                     View Assigned Tasks
                                 </button>
+                            </Link> : 
+                            <Link to={`/elves/${elfId}`}>
+                                <button
+                                    onClick={tasksOpenHandler}
+                                    className="w-full px-6 py-4 bg-white/10 hover:bg-white/20 text-white font-bold rounded-2xl border border-white/30 flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-95 shadow-lg group cursor-pointer">
+                                    <ListCollapse size={22} className="group-hover:text-blue-200 transition-colors" />
+                                    Hide Assigned Tasks
+                                </button>
                             </Link>
+                                }
                             </div>
                         </div>
                     </div>
-                    )};
                     <Outlet context={{elf}}/>
+                    </>
+                    )};
     </div>
     );
 };

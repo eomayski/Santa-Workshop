@@ -4,7 +4,6 @@ import { Link, NavLink } from 'react-router';
 import SnowOverlay from '../snow/SnowOverlay.jsx';
 
 const Header = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isSnowing, setIsSnowing] = useState(true);
 
@@ -14,17 +13,15 @@ const Header = () => {
         { name: 'Elves', icon: <Users size={18} /> },
     ];
 
-    // Функция за превключване на състоянието
     const toggleSnow = () => setIsSnowing(!isSnowing);
 
     return (
         <div className="relative w-full pt-4 px-4 z-50 mb-10">
             {isSnowing && <SnowOverlay />}
 
-            {/* --- Основен Хедър --- */}
             <header className="relative z-50 mx-auto max-w-6xl rounded-[30px] bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl px-6 py-3 flex justify-between items-center transition-all">
 
-                {/* Лого */}
+                {/* Logo */}
                 <div className="flex items-center gap-2 flex-shrink-0 cursor-pointer group">
                     <Link to={'/'}>
                         <img src="/images/SW Logo.png" alt="Santa`s Workshop" className='max-h-15'/>
@@ -34,7 +31,7 @@ const Header = () => {
                     </Link>
                 </div>
 
-                {/* Desktop Навигация */}
+                {/* Desktop Navigation */}
                 <nav className="hidden mx-5 md:flex items-center gap-1">
                     {navLinks.map((link) => (
                         <NavLink style={({ isActive }) => isActive ? { color: '#8ec5ff' } : {}}
@@ -63,7 +60,7 @@ const Header = () => {
                         `}
                         title={isSnowing ? "Clear Weather" : "Let it Snow"}
                     >
-                        {/* Анимирана смяна на иконите */}
+                        {/* Icons change with animation */}
                         <div className={`transition-transform duration-500 ${isSnowing ? 'rotate-0 scale-100' : 'rotate-180 scale-0 absolute'}`}>
                             <Snowflake size={20} />
                         </div>
@@ -73,7 +70,7 @@ const Header = () => {
                     </button>
                 </div>
 
-                {/* Мобилен контрол */}
+                {/* Mobile Controls */}
                 <div className="md:hidden flex items-center gap-2">
                      {/* Mobile Toggle Button */}
                      <button
@@ -95,7 +92,7 @@ const Header = () => {
 
             </header>
 
-            {/* Мобилно Меню */}
+            {/* Desktop Navigation */}
             {isMobileMenuOpen && (
                 <div className="absolute top-full left-0 right-0 mt-2 px-4 z-40 md:hidden animate-in fade-in slide-in-from-top-4 duration-300">
                     <div className="mx-auto max-w-6xl rounded-[30px] bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl overflow-hidden p-4 flex flex-col gap-2">
@@ -114,7 +111,7 @@ const Header = () => {
 
                         <div className="h-px bg-white/20 my-2 mx-4"></div>
 
-                        {/* Мобилен Switch за времето */}
+                        {/* Wether Switch */}
                         <button 
                             onClick={toggleSnow}
                             className="px-4 py-3 hover:bg-white/10 rounded-2xl font-bold flex items-center justify-between transition-colors group"
@@ -124,7 +121,6 @@ const Header = () => {
                                 <span>{isSnowing ? 'Snowing' : 'Clear Sky'}</span>
                             </div>
                             
-                            {/* Visual Toggle Track */}
                             <div className={`w-12 h-6 rounded-full relative transition-colors duration-300 ${isSnowing ? 'bg-blue-500/50' : 'bg-amber-500/50'}`}>
                                 <div className={`absolute top-1 w-4 h-4 rounded-full bg-white shadow-md transition-all duration-300 ${isSnowing ? 'left-7' : 'left-1'}`}></div>
                             </div>

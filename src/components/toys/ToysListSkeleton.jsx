@@ -1,5 +1,4 @@
 const ToysListSkeleton = () => {
-    // 5 реда за имитация на таблицата
     const rows = Array.from({ length: 5 });
 
     return (

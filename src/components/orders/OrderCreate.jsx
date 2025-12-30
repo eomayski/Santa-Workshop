@@ -36,11 +36,12 @@ export default function OrderCreate() {
     const [selectedCountry, setSelectedCountry] = useState(null);
     const [isCountryOpen, setIsCountryOpen] = useState(false);
     const countryWrapperRef = useRef(null);
+    const isSearching = toyInput !== debouncedToySearch;
 
     // --- Logic: Filter Toys ---
     const filteredToys = useMemo(() => {
         if (!toys || typeof toys !== 'object') return [];
-        
+
         const data = Object.entries(toys).map(([id, toy]) => ({ ...toy, id }));
 
         if (!debouncedToySearch || debouncedToySearch.trim() === '') return [];
@@ -52,11 +53,11 @@ export default function OrderCreate() {
     // --- Logic: Filter Countries ---
     const filteredCountries = useMemo(() => {
         if (!countries) return [];
-        
+
         let data = [...countries].sort((a, b) => a.name.common.localeCompare(b.name.common));
 
         if (countryInput && countryInput.trim() !== '') {
-            data = data.filter(c => 
+            data = data.filter(c =>
                 c.name.common.toLowerCase().includes(countryInput.toLowerCase())
             );
         }
@@ -81,31 +82,31 @@ export default function OrderCreate() {
         let country = formData.get('country')
         const toyId = formData.get('toyId');
         const priority = formData.get('priority')
-        
+
         if (childName.trim().length < 2) {
-            toast.error("Child's name must be at least two characters long" )
+            toast.error("Child's name must be at least two characters long")
             return;
         }
 
         if (!country) {
-            toast.error("Country must be selected!" )
+            toast.error("Country must be selected!")
             return;
         }
 
         if (!toyId) {
-            toast.error("Toy must be selected!" )
+            toast.error("Toy must be selected!")
             return;
         }
 
         if (!priority) {
-            toast.error("Priority must be selected!" )
+            toast.error("Priority must be selected!")
             return;
         }
 
         country = JSON.parse(country)
-        
-        const data = {childName, country, toyId, priority}
-        
+
+        const data = { childName, country, toyId, priority }
+
         createOrder(data)
 
         navigate('/orders')
@@ -167,7 +168,7 @@ export default function OrderCreate() {
                             </label>
                             <div className="relative w-full">
                                 <input type="hidden" name="country" value={selectedCountry ? JSON.stringify(selectedCountry) : ''} />
-                                
+
                                 <input
                                     className="w-full appearance-none bg-black/10 hover:bg-black/20 border border-white/10 focus:border-white/40 rounded-xl p-4 pl-12 text-white outline-none transition-all cursor-pointer placeholder-white/30"
                                     type="text"
@@ -180,7 +181,7 @@ export default function OrderCreate() {
                                     onFocus={() => setIsCountryOpen(true)}
                                     autoComplete="off"
                                 />
-                                
+
                                 {/* Flag Icon / Globe */}
                                 <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/50 pointer-events-none flex items-center justify-center w-6">
                                     {selectedCountry ? (
@@ -219,7 +220,7 @@ export default function OrderCreate() {
                             <label className="flex items-center gap-2 text-blue-100 text-xs font-bold uppercase tracking-wider">
                                 <Gift size={14} /> Toy
                             </label>
-                            
+
                             <div className="relative w-full">
                                 <input type="hidden" name="toyId" value={toyId} />
 
@@ -242,17 +243,25 @@ export default function OrderCreate() {
                                 {/* Toy Dropdown */}
                                 {isToyOpen && toyInput && (
                                     <ul className="absolute z-[100] w-full mt-2 border rounded-xl bg-slate-900/80 backdrop-blur-xl border-white/20 shadow-2xl max-h-80 overflow-y-auto no-scrollbar">
-                                        {filteredToys.length > 0 ? (
+
+                                        {/* 1. Първо проверяваме дали зареждаме от API или чакаме debounce */}
+                                        {toysPending || isSearching ? (
+                                            <li className="p-4 text-white/50 text-center">
+                                                Toys Searching...
+                                            </li>
+                                        ) : filteredToys.length > 0 ? (
+                                            /* 2. Ако не зареждаме и имаме резултати */
                                             filteredToys.map((toy) => (
                                                 <li
                                                     key={toy.id}
-                                                    onClick={() => handleSelectToy(toy.name, toy.id)} 
+                                                    onClick={() => handleSelectToy(toy.name, toy.id)}
                                                     className="p-4 text-white cursor-pointer hover:bg-white/10 transition-colors border-b border-white/5 last:border-none text-left"
                                                 >
                                                     {toy.name}
                                                 </li>
                                             ))
                                         ) : (
+                                            /* 3. Ако не зареждаме и НЯМА резултати */
                                             <li className="p-4 text-white/50 text-center">
                                                 No toys found!
                                             </li>
