@@ -1,6 +1,7 @@
 import { Users } from 'lucide-react';
 import NoticeBoard from './NoticeBoard.jsx';
 import StatusCard from './StatusCard.jsx';
+import ChristmasCountdown from '../countdown/Contdown.jsx';
 
 const Hero = () => {
     return (
@@ -9,13 +10,8 @@ const Hero = () => {
             {/* Main Glass Panel */}
             <div className="relative mx-auto z-10 w-full max-w-5xl bg-white/10 backdrop-blur-xl border border-white/30 rounded-[40px] shadow-2xl overflow-hidden p-8 sm:p-10 text-center">
 
-                {/* Badge */}
-                <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-white/20 backdrop-blur-md border border-white/40 shadow-sm animate-pulse">
-                    <span className="text-xl">❄️</span>
-                    <span className="text-white font-medium text-sm sm:text-base tracking-wide">
-                        North Pole Status: <span className="text-green-300 font-bold">OPERATIONAL</span>
-                    </span>
-                </div>
+                {/* Countdown toward Christmas */}
+                    <ChristmasCountdown />
 
                 {/* Heading */}
                 <h1 className="text-4xl sm:text-6xl font-black text-white mb-6 tracking-tight drop-shadow-lg leading-tight">

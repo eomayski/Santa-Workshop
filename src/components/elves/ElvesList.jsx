@@ -65,9 +65,9 @@ const ElvesList = () => {
                                 const isLowEnergy = elf.energy < 40;
 
                                 return (
-                                    <Link to={`/elves/${elf.id}`}>
+                                    <Link key={elf.id} to={`/elves/${elf.id}`}>
 
-                                    <div key={elf.id} className="group relative overflow-hidden rounded-[30px] bg-white/10 backdrop-blur-xl border border-white/30 shadow-2xl p-6 flex flex-col items-center text-center transition-all duration-300 hover:bg-white/15 hover:scale-[1.02] hover:border-white/50">
+                                    <div  className="group relative overflow-hidden rounded-[30px] bg-white/10 backdrop-blur-xl border border-white/30 shadow-2xl p-6 flex flex-col items-center text-center transition-all duration-300 hover:bg-white/15 hover:scale-[1.02] hover:border-white/50">
 
                                         {/* Image Container - CLEAN & SHADOWED */}
                                         <div className="relative mb-5 w-full max-w-[250px] aspect-square rounded-[2rem] overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-105">

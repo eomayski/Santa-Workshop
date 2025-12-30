@@ -3,13 +3,20 @@ import { Plus, Package } from 'lucide-react';
 import { useOrders } from '../../hooks/useOrders.js';
 import Order from './Order.jsx';
 import useTitle from '../../hooks/useTitle.js';
-import { Link } from 'react-router';
+import { Link, useOutletContext } from 'react-router';
 import Pagination from '../pagination/Pagination.jsx';
 
 const OrdersList = () => {
     useTitle('Orders');
     const [activeTab, setActiveTab] = useState("All");
     const { data: orders, error, isPending } = useOrders();
+    const context = useOutletContext();
+    let elf = {}
+
+    if (context) {
+        elf = context.elf
+    }
+    
     
     // --- Pagination State ---
     const [page, setPage] = useState(1);
@@ -26,6 +33,14 @@ const OrdersList = () => {
         if (!orders || typeof orders !== 'object' || Object.keys(orders).length === 0) return [];
 
         let data = Object.entries(orders).map(([id, order]) => ({ ...order, id }));
+
+        if (Object.keys(elf).length !== 0) {
+            if (!elf.tasks) {
+                data = []    
+            } else {
+                data = Object.entries(elf.tasks).map(([id, task]) => ({ ...task, id }))
+            }
+        }
 
         // Transform priority to status logic
         data = data.map((order) => {
@@ -81,12 +96,14 @@ const OrdersList = () => {
                         </button>
                     ))}
                 </div>
+                {Object.keys(elf).length === 0 && 
                 <Link to={'/orders/new'}>
                     <button className="w-full sm:w-auto group relative px-6 py-2.5 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-xl font-bold shadow-lg shadow-red-900/30 transition-all active:scale-95 flex items-center justify-center gap-2 overflow-hidden cursor-pointer">
                         <Plus size={18} className="relative z-10" />
                         <span className="relative z-10">Create Order</span>
                     </button>
                 </Link>
+                }
             </div>
 
             {isPending && <div className="text-center py-12 text-white">Loading...</div>}
