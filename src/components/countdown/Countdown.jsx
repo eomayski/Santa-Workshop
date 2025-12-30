@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Snowflake, Clock } from 'lucide-react';
 
-// Вътрешен компонент за кутийката
 const TimeBox = ({ value, label }) => (
   <div className="flex flex-col items-center justify-center 
                   p-4 rounded-2xl 
@@ -57,7 +56,6 @@ const ChristmasCountdown = () => {
   return (
     <div className="w-full max-w-5xl mx-auto px-4 mb-10">
       
-      {/* Header */}
       <div className="flex items-center justify-center gap-2 mb-6 text-white/90">
         <Clock size={16} className="animate-pulse" />
         <span className="font-bold uppercase tracking-[0.2em] text-xs sm:text-sm drop-shadow-md">
@@ -65,15 +63,11 @@ const ChristmasCountdown = () => {
         </span>
       </div>
 
-      {/* --- GRID LAYOUT --- 
-          grid-cols-2 (Mobile): 2 колони (2x2 кутийки)
-          md:flex (Desktop): Всичко на един ред
-      */}
+
       <div className="grid grid-cols-2 gap-3 md:flex md:justify-center md:gap-6">
         
         <TimeBox value={timeLeft.days} label="Days" />
         
-        {/* Separator - Скриваме го на мобилни, показваме само на Desktop */}
         <div className="hidden md:flex flex-col justify-start pt-4">
             <span className="text-4xl text-white/30 font-black animate-ping">:</span>
         </div>
@@ -94,7 +88,6 @@ const ChristmasCountdown = () => {
         
       </div>
 
-      {/* Footer */}
       <div className="mt-8 text-center px-4">
         <div className="inline-flex flex-wrap justify-center items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/70 text-[10px] sm:text-xs font-medium backdrop-blur-sm">
            <Snowflake size={12} className="animate-spin-slow text-blue-300" />

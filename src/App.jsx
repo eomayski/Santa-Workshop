@@ -9,6 +9,8 @@ import OrderCreate from "./components/orders/OrderCreate.jsx";
 import { ToastContainer } from "react-toastify";
 import ElvesList from "./components/elves/ElvesList.jsx";
 import ElfDetails from "./components/elves/ElfDetails.jsx";
+import ErrorBoundary from "./components/error/ErrorBoundary.jsx";
+
 
 const App = () => {
 
@@ -23,19 +25,22 @@ const App = () => {
                 <Header />
                 <ToastContainer theme="color" toastClassName={`bg-white/10 backdrop-blur-xl border border-white/30 rounded-2xl`} closeButton={false} />
                 <div className="w-full max-w-6xl mx-auto p-4 mb-20">
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/toys" element={<ToysList />} />
-                    <Route path="/toys/:toyId" element={<ToyDetails />} />
-                    <Route path="/orders" element={<OrdersList />} />
-                    <Route path="/orders/new" element={<OrderCreate />} />
-                    <Route path="/elves" element={<ElvesList />} />
-                    <Route path="/elves/:elfId" element={<ElfDetails />} >
-                    <Route path="tasks" element={<OrdersList />} />
-                    </Route>
 
-                    <Route path="/*" element={<NotFound />} />
-                </Routes>
+                    <ErrorBoundary>
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/toys" element={<ToysList />} />
+                            <Route path="/toys/:toyId" element={<ToyDetails />} />
+                            <Route path="/orders" element={<OrdersList />} />
+                            <Route path="/orders/new" element={<OrderCreate />} />
+                            <Route path="/elves" element={<ElvesList />} />
+                            <Route path="/elves/:elfId" element={<ElfDetails />} >
+                                <Route path="tasks" element={<OrdersList />} />
+                            </Route>
+
+                            <Route path="/*" element={<NotFound />} />
+                        </Routes>
+                    </ErrorBoundary>
                 </div>
             </div>
         </div>

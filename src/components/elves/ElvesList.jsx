@@ -3,6 +3,7 @@ import useTitle from '../../hooks/useTitle.js';
 import { useElves } from '../../hooks/useElves.js';
 import { useMemo } from 'react';
 import { Link } from 'react-router';
+import ElvesListSkeleton from './ElevesListSkeleton.jsx';
 
 
 const ElvesList = () => {
@@ -27,12 +28,7 @@ const ElvesList = () => {
         <>
             {/* Loading State */}
             {isPending && (
-                <div className="text-center py-12">
-                    <div className="inline-block text-white">
-                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mb-4"></div>
-                        <p>Loading elves...</p>
-                    </div>
-                </div>
+                <ElvesListSkeleton />
             )}
 
             {/* Error State */}

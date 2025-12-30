@@ -67,7 +67,7 @@ const NoticeBoard = () => {
       type: 'maintenance',
       icon: <Wrench size={24} />,
       title: 'Sleigh Maintenance',
-      message: 'Engineers report landing gear check complete. All systems green.',
+      message: 'Landing gear check complete. All systems green.',
       colorClass: 'bg-purple-500/80',
     }
   ];

@@ -224,10 +224,10 @@ const ToysList = () => {
                                                 )}
                                             </td>
 
-                                            {/* Action Button */}
+                                            {/* Details Button */}
                                             <td className="p-2 sm:p-4 text-right align-middle">
                                                 <Link to={`/toys/${toy.id}`}>
-                                                    <button className="inline-flex items-center justify-center w-8 h-8 sm:w-auto sm:px-3 sm:py-2 bg-white/5 hover:bg-white/20 text-white border border-white/20 hover:border-white/40 rounded-lg transition-all shadow-sm active:scale-95 ml-auto">
+                                                    <button className="inline-flex items-center justify-center w-8 h-8 sm:w-auto sm:px-3 sm:py-2 bg-white/5 hover:bg-white/20 text-white border border-white/20 hover:border-white/40 rounded-lg transition-all shadow-sm active:scale-95 ml-auto cursor-pointer">
                                                         <Eye size={16} />
                                                         <span className="hidden sm:inline ml-2 text-xs font-bold">Details</span>
                                                     </button>

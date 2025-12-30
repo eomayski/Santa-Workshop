@@ -1,19 +1,11 @@
+const API_SECRET_KEY = 'Santa-Secret-Key-2025-Workshop-Access'; 
 
 const BASE_URL = 'https://santa-s-workshop-sirma-2025-default-rtdb.firebaseio.com/';
-
 
 async function client(endpoint, { body, ...customConfig } = {}) {
   const headers = {
     'Content-Type': 'application/json',
   };
-  
-
-  //TODO Authentication logic
-
-  // const token = localStorage.getItem('token');
-  // if (token) {
-  //   headers.Authorization = `Bearer ${token}`;
-  // }
 
   const config = {
     method: body ? 'POST' : 'GET',
@@ -25,7 +17,12 @@ async function client(endpoint, { body, ...customConfig } = {}) {
   };
 
   if (body) {
-    config.body = JSON.stringify(body);
+    const bodyWithSecret = {
+      ...body,
+      secretKey: API_SECRET_KEY
+    };
+    
+    config.body = JSON.stringify(bodyWithSecret);
   }
 
   const response = await fetch(`${BASE_URL}${endpoint}`, config);
@@ -40,7 +37,6 @@ async function client(endpoint, { body, ...customConfig } = {}) {
   return response.json();
 }
 
-// Експортваме конкретните методи за удобство
 export const api = {
   get: (endpoint, customConfig = {}) => client(endpoint, { ...customConfig, method: 'GET' }),
   
@@ -51,7 +47,6 @@ export const api = {
   delete: (endpoint, customConfig = {}) => client(endpoint, { ...customConfig, method: 'DELETE' }),
 };
 
-// За Firebase добавяме .json където е нужно
 export const firebaseApi = {
   get: (path) => api.get(`${path}.json`),
   post: (path, data) => api.post(`${path}.json`, data),
