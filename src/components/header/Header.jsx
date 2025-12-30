@@ -71,33 +71,6 @@ const Header = () => {
                             <Sun size={20} />
                         </div>
                     </button>
-
-                    <div className="h-6 w-px bg-white/20 mx-1"></div>
-
-                    {/* Auth Buttons */}
-                    {isLoggedIn ? (
-                        <button
-                            onClick={() => setIsLoggedIn(false)}
-                            className="flex items-center gap-2 px-5 py-2.5 bg-white/10 hover:bg-white/20 text-white border border-white/30 hover:border-white/50 rounded-2xl font-bold text-sm transition-all shadow-sm hover:shadow-md active:scale-95"
-                        >
-                            <LogOut size={18} />
-                            Logout
-                        </button>
-                    ) : (
-                        <>
-                            <button className="flex items-center gap-2 px-4 py-2 text-blue-100 hover:text-white hover:bg-white/10 rounded-xl font-bold text-sm transition-all">
-                                <UserPlus size={18} />
-                                Register
-                            </button>
-                            <button
-                                onClick={() => setIsLoggedIn(true)}
-                                className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-2xl font-bold text-sm shadow-lg shadow-red-900/30 transition-all active:scale-95"
-                            >
-                                <LogIn size={18} />
-                                Login
-                            </button>
-                        </>
-                    )}
                 </div>
 
                 {/* Мобилен контрол */}
@@ -156,29 +129,6 @@ const Header = () => {
                                 <div className={`absolute top-1 w-4 h-4 rounded-full bg-white shadow-md transition-all duration-300 ${isSnowing ? 'left-7' : 'left-1'}`}></div>
                             </div>
                         </button>
-
-                        <div className="flex flex-col gap-2 p-2 mt-2">
-                            {isLoggedIn ? (
-                                <button
-                                    onClick={() => { setIsLoggedIn(false); setIsMobileMenuOpen(false); }}
-                                    className="flex items-center justify-center gap-2 px-5 py-3 bg-white/10 hover:bg-white/20 text-white border border-white/30 rounded-2xl font-bold transition-all"
-                                >
-                                    <LogOut size={18} /> Logout
-                                </button>
-                            ) : (
-                                <>
-                                    <button className="flex items-center justify-center gap-2 px-5 py-3 text-white hover:bg-white/10 rounded-2xl font-bold transition-all">
-                                        <UserPlus size={18} /> Register
-                                    </button>
-                                    <button
-                                        onClick={() => { setIsLoggedIn(true); setIsMobileMenuOpen(false); }}
-                                        className="flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-2xl font-bold shadow-lg transition-all"
-                                    >
-                                        <LogIn size={18} /> Login
-                                    </button>
-                                </>
-                            )}
-                        </div>
                     </div>
                 </div>
             )}

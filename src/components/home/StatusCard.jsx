@@ -3,6 +3,7 @@ import { useOrders } from "../../hooks/useOrders.js";
 import { useToys } from "../../hooks/useToys.js";
 import { useElves } from "../../hooks/useElves.js";
 import { Gift, Package, Users } from "lucide-react";
+import { Link } from "react-router";
 
 export default function StatusCard({ card }) {
     const { data: toys, error: toysError, isPending: toysPending } = useToys();
@@ -24,14 +25,33 @@ export default function StatusCard({ card }) {
                 break;
             case "orders":
                 if (orders) {
-                    setData([...Object.keys(orders)])
+                    let data = Object.entries(orders).map(([id, order]) => ({ ...order, id }));
+                    
+                    // Transform priority to status logic
+                    data = data.map((order) => {
+                        switch (order.priority) {
+                            case "Low": order.status = "Pending"; break;
+                            case "Normal": order.status = "Packed"; break;
+                            case "High": order.status = "Shipped"; break;
+                            default: break;
+                        }
+                        return order;
+                    });
+
+                    data = data.filter(order => order.status === "Pending");
+
+                    setData(data)
                     setError(ordersError)
                     setIsPending(ordersPending)
                 }
                 break;
             case "elves":
                 if (elves) {
-                    setData([...Object.keys(elves)])
+                    let data = Object.entries(elves).map(([id, elf]) => ({ ...elf, id }));
+
+                    data = data.filter(elf => elf.energy > 0);
+
+                    setData(data)
                     setError(elvesError)
                     setIsPending(elvesPending)
                 }
@@ -40,33 +60,34 @@ export default function StatusCard({ card }) {
     }, [card, toys, toysError, toysPending, orders, ordersError, ordersPending, elves, elvesError, elvesPending])
 
     return (
+        <Link to={card === "toys" ? "/toys" : card === "orders" ? "/orders" : "/elves"}>
+            <div className="group rounded-3xl bg-white/20 backdrop-blur-lg border border-white/30 p-6 flex flex-col items-center shadow-lg hover:bg-white/25 transition-all duration-300">
 
-        <div className="group rounded-3xl bg-white/20 backdrop-blur-lg border border-white/30 p-6 flex flex-col items-center shadow-lg hover:bg-white/25 transition-all duration-300">
+                {card === "toys" ?
+                    <>
+                        <div className="p-3 bg-blue-500/90 text-white rounded-2xl mb-3 shadow-inner">
+                            <Gift size={28} strokeWidth={2.5} />
+                        </div>
+                        <h3 className="text-blue-100 text-xs font-bold uppercase tracking-widest mb-1">Total Toys</h3>
+                    </>
+                    :
+                    card === "orders" ?
+                        <>
+                            <div className="p-3 bg-orange-500/90 text-white rounded-2xl mb-3 shadow-inner">
+                                <Package size={28} strokeWidth={2.5} />
+                            </div>
+                            <h3 className="text-orange-100 text-xs font-bold uppercase tracking-widest mb-1">Pending Orders</h3>
+                        </>
+                        :
+                        <>
+                            <div className="p-3 bg-green-500/90 text-white rounded-2xl mb-3 shadow-inner">
+                                <Users size={28} strokeWidth={2.5} />
+                            </div>
+                            <h3 className="text-green-100 text-xs font-bold uppercase tracking-widest mb-1">Active Elves</h3>
+                        </>}
 
-            {card === "toys" ?
-                <>
-                    <div className="p-3 bg-blue-500/90 text-white rounded-2xl mb-3 shadow-inner">
-                        <Gift size={28} strokeWidth={2.5} />
-                    </div>
-                    <h3 className="text-blue-100 text-xs font-bold uppercase tracking-widest mb-1">Total Toys</h3>
-                </>
-                :
-                card === "orders" ?
-                <>
-                    <div className="p-3 bg-orange-500/90 text-white rounded-2xl mb-3 shadow-inner">
-                        <Package size={28} strokeWidth={2.5} />
-                    </div>
-                    <h3 className="text-orange-100 text-xs font-bold uppercase tracking-widest mb-1">Pending Orders</h3>
-                </>
-                :
-                <>
-                    <div className="p-3 bg-green-500/90 text-white rounded-2xl mb-3 shadow-inner">
-                        <Users size={28} strokeWidth={2.5} />
-                    </div>
-                    <h3 className="text-green-100 text-xs font-bold uppercase tracking-widest mb-1">Active Elves</h3>
-                </>}
-
-            <p className="text-3xl sm:text-4xl font-black text-white drop-shadow-md">{isPending ? 'Loading...' : error ? "Error!" : data.length}</p>
-        </div>
+                <p className="text-3xl sm:text-4xl font-black text-white drop-shadow-md">{isPending ? 'Loading...' : error ? "Error!" : data.length}</p>
+            </div>
+        </Link>
     );
 }

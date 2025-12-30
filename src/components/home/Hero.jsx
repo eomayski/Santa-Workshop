@@ -1,7 +1,6 @@
-import { Users } from 'lucide-react';
 import NoticeBoard from './NoticeBoard.jsx';
 import StatusCard from './StatusCard.jsx';
-import ChristmasCountdown from '../countdown/Contdown.jsx';
+import ChristmasCountdown from '../countdown/Countdown.jsx';
 
 const Hero = () => {
     return (
@@ -10,7 +9,7 @@ const Hero = () => {
             {/* Main Glass Panel */}
             <div className="relative mx-auto z-10 w-full max-w-5xl bg-white/10 backdrop-blur-xl border border-white/30 rounded-[40px] shadow-2xl overflow-hidden p-8 sm:p-10 text-center">
 
-                {/* Countdown toward Christmas */}
+                {/* Countdown to Christmas */}
                     <ChristmasCountdown />
 
                 {/* Heading */}
