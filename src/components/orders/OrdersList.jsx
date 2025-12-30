@@ -69,12 +69,11 @@ const OrdersList = () => {
     }, [page, limit, filteredOrders]);
 
     return (
-        <div className="w-full min-w-0"> {/* Wrapper to prevent flex overflow */}
+        <div className="w-full min-w-0">
 
             {/* --- CONTROLS SECTION --- */}
             <div className="mb-6 flex flex-col xl:flex-row justify-between items-center gap-4 bg-white/10 backdrop-blur-xl border border-white/30 rounded-[20px] p-2 shadow-lg">
 
-                {/* TABS: Grid 2x2 on mobile, Flex row on desktop */}
                 <div className="grid grid-cols-2 sm:flex p-1 bg-black/20 rounded-xl w-full xl:w-auto gap-1 sm:gap-0">
                     {TABS.map((tab) => (
                         <button
@@ -109,9 +108,8 @@ const OrdersList = () => {
             {!isPending && !error && (
                 <div className="rounded-[30px] bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl overflow-hidden flex flex-col">
 
-                    {/* TABLE WRAPPER (Scrollable) */}
+                    {/* TABLE WRAPPER */}
                     <div className="overflow-x-auto">
-                        {/* min-w-[350px] гарантира, че таблицата не се смачква твърде много */}
                         <table className="w-full text-left border-collapse min-w-[350px]">
                             <thead>
                                 <tr className="bg-white/10 text-blue-100 border-b border-white/20 text-xs font-bold uppercase tracking-wider">
@@ -137,7 +135,7 @@ const OrdersList = () => {
                         </table>
                     </div>
 
-                    {/* PAGINATION FOOTER (Non-scrollable, separate block) */}
+                    {/* PAGINATION */}
                     <div className="border-t border-white/10 p-4 bg-white/5">
                         <Pagination
                             total={filteredOrders.length}

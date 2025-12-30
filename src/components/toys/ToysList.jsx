@@ -247,7 +247,7 @@ const ToysList = () => {
                         </table>
                     </div>
 
-                    {/* PAGINATION: Извън overflow-x-auto, но вътре в картата */}
+                    {/* PAGINATION */}
                     <div className="border-t border-white/10 p-4 bg-white/5">
                         <Pagination 
                             total={processedToys.length} 

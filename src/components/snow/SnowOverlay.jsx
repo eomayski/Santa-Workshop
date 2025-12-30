@@ -1,4 +1,3 @@
-// --- Помощен компонент за снега (Без промяна) ---
 const SnowOverlay = () => {
     const flakes = Array.from({ length: 50 }).map((_, i) => ({
         id: i,

@@ -8,10 +8,8 @@
         const location = useLocation();
         const { data: elf, error, isPending } = useElf(elfId);
         const [ taskIs, setTasksIs] = useState(location.pathname.endsWith('/tasks'))
-
-
-        // --- Local State ---
         const [elfEnergy, setElfEnergy] = useState(0);
+
 
         useEffect(() => {
             if (elf?.energy) {
@@ -26,7 +24,7 @@
             }
         };
 
-        // --- Helper: Energy Colors ---
+        // --- Energy Colors ---
         const getEnergyColorClass = (level) => {
             if (level >= 80) return 'from-green-400 to-green-500 shadow-[0_0_20px_rgba(74,222,128,0.5)]';
             if (level >= 40) return 'from-amber-400 to-amber-500 shadow-[0_0_20px_rgba(251,191,36,0.5)]';
@@ -62,9 +60,8 @@
                 {!isPending && !error && (
                     <>
                         <div className="rounded-[40px] bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl overflow-hidden mb-6 flex flex-col md:flex-row">
-                            {/* --- Main Glass Card --- */}
 
-                            {/* === Left Column: Image & Energy === */}
+                            {/* --- Main Glass Card --- */}
                             <div className="w-full md:w-5/12 p-6 sm:p-8 flex flex-col gap-6 border-b md:border-b-0 md:border-r border-white/10 bg-black/10">
 
                                 {/* Image */}
