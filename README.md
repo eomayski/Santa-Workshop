@@ -12,7 +12,7 @@ A festive React Single Page Application for managing Santa's workshop operations
   - Pending Orders count (Orders with `Pending` status only)
   - Active Elves count (excluding elves with 0% energy)
 
-![Home](https://github.com/user-attachments/assets/0811c9ea-087b-4380-89b9-30b2bc89c1b6)
+![](https://github.com/user-attachments/assets/0811c9ea-087b-4380-89b9-30b2bc89c1b6)
 
 ### ✅ Toys Module (`/toys`)
 - **Toys List**
@@ -25,7 +25,7 @@ A festive React Single Page Application for managing Santa's workshop operations
   - **Pagination** - Previous/Next buttons with 5 items per page
 
 
-![Toys](https://github.com/user-attachments/assets/95e7bc70-b248-4ed8-ab77-40c70f06130b)
+![](https://github.com/user-attachments/assets/95e7bc70-b248-4ed8-ab77-40c70f06130b)
 
 - **Toy Details** (`/toys/:toyId`)
   - Full toy information display
@@ -34,7 +34,7 @@ A festive React Single Page Application for managing Santa's workshop operations
   - Smooth animations and transitions
   - Back to Inventory navigation link
 
-![Toy Details](https://github.com/user-attachments/assets/17104bdb-46a9-45c1-a598-70295da4f909)
+![](https://github.com/user-attachments/assets/17104bdb-46a9-45c1-a598-70295da4f909)
 
 ### ✅ Orders Module (`/orders`)
 - **Orders List**
@@ -49,7 +49,7 @@ A festive React Single Page Application for managing Santa's workshop operations
   - **Pagination** - Previous/Next buttons with 5 items per page
 
 
-![Orders](https://github.com/user-attachments/assets/0cc9a450-d168-4057-b7f9-ac5cb98f5876)
+![](https://github.com/user-attachments/assets/0cc9a450-d168-4057-b7f9-ac5cb98f5876)
 
 - **Create Order** (`/orders/new`)
   - Form with fields:
@@ -61,9 +61,9 @@ A festive React Single Page Application for managing Santa's workshop operations
   - Validation error messages with react-toastify
   - Submit creates order and redirects to `/orders`
 
-![New Order](https://github.com/user-attachments/assets/8115b9c6-d2a3-40b2-9090-9b347ad9a8da)
+![](https://github.com/user-attachments/assets/8115b9c6-d2a3-40b2-9090-9b347ad9a8da)
 
-![New Order Error Message](https://github.com/user-attachments/assets/a9f3dc95-6d4b-4733-9f3b-23a950c471fa)
+![](https://github.com/user-attachments/assets/a9f3dc95-6d4b-4733-9f3b-23a950c471fa)
 
 ### ✅ Elves Module (`/elves`)
 - **Elves List**
@@ -74,7 +74,7 @@ A festive React Single Page Application for managing Santa's workshop operations
   - Click-able cards to view elf profile
 
 
-![Elves](https://github.com/user-attachments/assets/a6ba087f-9439-4f88-9640-a26c263215c6)
+![](https://github.com/user-attachments/assets/a6ba087f-9439-4f88-9640-a26c263215c6)
 
 - **Elf Profile** (`/elves/:elfId`)
   - Full elf information and details
@@ -92,7 +92,7 @@ A festive React Single Page Application for managing Santa's workshop operations
   - Reuses Orders List component
   - Back button returns to elf profile (`/elves/:elfId`) with closed task list
 
-![Elf Profile](https://github.com/user-attachments/assets/fe25746f-e904-46ca-ad95-8b01fb3097ad)
+![](https://github.com/user-attachments/assets/fe25746f-e904-46ca-ad95-8b01fb3097ad)
 
 ### ✨ Additional Features
 - ✅ **Pagination Component** - Simple Previous/Next navigation
