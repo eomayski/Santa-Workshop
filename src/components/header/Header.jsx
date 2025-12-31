@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Menu, X, LogIn, LogOut, UserPlus, Gift, Package, Users, Snowflake, Sun } from 'lucide-react';
+import { Menu, X, Gift, Package, Users, Snowflake, Sun } from 'lucide-react';
 import { Link, NavLink } from 'react-router';
 import SnowOverlay from '../snow/SnowOverlay.jsx';
+import { useState } from 'react';
 
 const Header = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -16,10 +16,10 @@ const Header = () => {
     const toggleSnow = () => setIsSnowing(!isSnowing);
 
     return (
-        <div className="relative w-full pt-4 px-4 z-50 mb-10">
+        <div className="relative w-full pt-4 z-50 mb-10">
             {isSnowing && <SnowOverlay />}
 
-            <header className="relative z-50 mx-auto max-w-6xl rounded-[30px] bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl px-6 py-3 flex justify-between items-center transition-all">
+            <header className="relative z-50 w-full rounded-[30px] bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl px-6 py-3 flex justify-between items-center transition-all">
 
                 {/* Logo */}
                 <div className="flex items-center gap-2 flex-shrink-0 cursor-pointer group">

@@ -69,7 +69,7 @@ const OrdersList = () => {
     }, [page, limit, filteredOrders]);
 
     return (
-        <div className="w-full min-w-0">
+        <div className="w-full flex flex-col flex-grow min-w-0">
 
             {/* --- CONTROLS SECTION --- */}
             <div className="mb-6 flex flex-col xl:flex-row justify-between items-center gap-4 bg-white/10 backdrop-blur-xl border border-white/30 rounded-[20px] p-2 shadow-lg">

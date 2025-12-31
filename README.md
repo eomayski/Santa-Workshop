@@ -12,6 +12,8 @@ A festive React Single Page Application for managing Santa's workshop operations
   - Pending Orders count (Orders with `Pending` status only)
   - Active Elves count (excluding elves with 0% energy)
 
+![Home](https://github.com/user-attachments/assets/0811c9ea-087b-4380-89b9-30b2bc89c1b6)
+
 ### ✅ Toys Module (`/toys`)
 - **Toys List**
   - Table view with toy details (name, category, difficulty, in-stock status)

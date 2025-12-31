@@ -8,7 +8,7 @@ const NotFound = () => {
     return (
         <>
             {/* --- 404 Glass Card --- */}
-            <div className="relative z-10 w-full bg-white/10 backdrop-blur-xl border border-white/30 rounded-[40px] shadow-2xl p-8 sm:p-12 text-center flex flex-col items-center">
+            <div className="relative z-10 w-full bg-white/10 backdrop-blur-xl border border-white/30 rounded-[40px] shadow-2xl p-8 sm:p-12 text-center flex flex-grow flex-col items-center">
 
                 {/* Decorative Top Icon */}
                 <div className="mb-6 p-4 bg-white/10 rounded-full border border-white/20 shadow-inner animate-bounce">

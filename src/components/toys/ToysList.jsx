@@ -80,7 +80,7 @@ const ToysList = () => {
     useEffect(() => { setPage(1); }, [filterCategory, filterInStock]);
 
     return (
-        <div className="w-full min-w-0">
+        <div className="w-full flex flex-col flex-grow min-w-0">
 
             {isPending && <ToysListSkeleton />}
 
@@ -127,8 +127,6 @@ const ToysList = () => {
                     </div>
                 </div>
 
-                {/* --- TABLE & PAGINATION CONTAINER --- */}
-                {/* Събираме таблицата и паджинейшъна в една "карта", но паджинейшъна е под скролващия се див */}
                 <div className="rounded-[20px] bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl p-0 overflow-hidden">
                     
                     {/* SCROLLABLE TABLE AREA */}
@@ -137,7 +135,6 @@ const ToysList = () => {
                             <thead>
                                 <tr className="bg-white/10 text-blue-100 border-b border-white/20 text-[10px] sm:text-xs uppercase tracking-wider">
                                     
-                                    {/* 1. NAME */}
                                     <th onClick={() => handleSort('name')} className="p-3 sm:p-4 font-bold cursor-pointer hover:bg-white/10 transition-colors select-none w-[40%]">
                                         <div className="flex items-center group">
                                             Toy Name <SortIcon columnKey="name" />
@@ -150,7 +147,6 @@ const ToysList = () => {
                                     {/* 3. DIFFICULTY */}
                                     <th onClick={() => handleSort('difficulty')} className="p-2 sm:p-4 font-bold cursor-pointer hover:bg-white/10 transition-colors select-none text-left w-[20%]">
                                         <div className="flex items-center group">
-                                            {/* Mobile: Diff, Desktop: Difficulty */}
                                             <span className="sm:hidden">Diff</span>
                                             <span className="hidden sm:inline">Difficulty</span>
                                             <SortIcon columnKey="difficulty" />
@@ -200,13 +196,11 @@ const ToysList = () => {
                                                     toy.difficulty === 'Medium' ? 'bg-amber-500/10 border-amber-400/20 text-amber-200' :
                                                     'bg-red-500/10 border-red-400/20 text-red-200'
                                                 }`}>
-                                                    {/* ТОЧКАТА: hidden on mobile, block on sm+ */}
                                                     <span className={`hidden sm:block w-1.5 h-1.5 flex-shrink-0 rounded-full ${
                                                         toy.difficulty === 'Easy' ? 'bg-green-400' :
                                                         toy.difficulty === 'Medium' ? 'bg-amber-400' : 'bg-red-400'
                                                     }`}></span>
                                                     
-                                                    {/* ТЕКСТЪТ: Винаги се вижда целия */}
                                                     <span>{toy.difficulty}</span>
                                                 </span>
                                             </td>

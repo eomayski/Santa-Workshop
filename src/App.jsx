@@ -10,6 +10,7 @@ import { ToastContainer } from "react-toastify";
 import ElvesList from "./components/elves/ElvesList.jsx";
 import ElfDetails from "./components/elves/ElfDetails.jsx";
 import ErrorBoundary from "./components/error/ErrorBoundary.jsx";
+import Footer from "./components/footer/Footer.jsx";
 
 
 const App = () => {
@@ -23,8 +24,8 @@ const App = () => {
             ></div>
             <div className="wrapper">
                 <Header />
-                <ToastContainer theme="color" toastClassName={`bg-white/10 backdrop-blur-xl border border-white/30 rounded-2xl`} closeButton={false} />
-                <div className="w-full max-w-6xl mx-auto p-4 mb-20">
+                <div className="w-full flex flex-col flex-grow">
+                    <ToastContainer theme="color" toastClassName={`bg-white/10 backdrop-blur-xl border border-white/30 rounded-2xl`} closeButton={false} />
 
                     <ErrorBoundary>
                         <Routes>
@@ -42,6 +43,7 @@ const App = () => {
                         </Routes>
                     </ErrorBoundary>
                 </div>
+                    <Footer/>
             </div>
         </div>
     );
