@@ -3,7 +3,7 @@ import useTitle from '../../hooks/useTitle.js';
 import { useElves } from '../../hooks/useElves.js';
 import { useMemo } from 'react';
 import { Link } from 'react-router';
-import ElvesListSkeleton from './ElevesListSkeleton.jsx';
+import ElvesListSkeleton from './ElvesListSkeleton.jsx';
 
 
 const ElvesList = () => {
